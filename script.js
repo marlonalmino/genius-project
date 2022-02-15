@@ -57,10 +57,10 @@ let checkOrder = () => {
 // Função para o clique do usuário
 let click = (color) => {
   clickedOrder[clickedOrder.length] = color
-  elementColor(color).classList.add('selected')
+  createColorElement(color).classList.add('selected')
 
   setTimeout(() => {
-    elementColor(color).classList.remove('selected')
+    createColorElement(color).classList.remove('selected')
     checkOrder()
   }, 250)
 }
@@ -110,9 +110,11 @@ let playGame = () => {
   nextLevel()
 }
 
-green.addEventListener('click', click(0))
-red.addEventListener('click', click(1))
-yellow.addEventListener('click', click(2))
-blue.addEventListener('click', click(3))
+// Eventos de clique para as cores
+green.onclick = () => click(0)
+red.onclick = () => click(1)
+yellow.onclick = () => click(2)
+blue.onclick = () => click(3)
 
+// Primeira inicialização do jogo
 playGame()
