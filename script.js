@@ -43,7 +43,7 @@ let lightColor = (element, number) => {
 let checkOrder = () => {
   for (let i in clickedOrder) {
     if (clickedOrder[i] != order[i]) {
-      lose()
+      gameOver()
       break
     }
   }
@@ -61,7 +61,58 @@ let click = (color) => {
 
   setTimeout(() => {
     elementColor(color).classList.remove('selected')
-  })
-
-  checkOrder()
+    checkOrder()
+  }, 250)
 }
+
+// Função que retorna a cor
+let createColorElement = (color) => {
+  switch (color) {
+    case 0:
+      return green
+
+    case 1:
+      return red
+
+    case 2:
+      return yellow
+
+    case 3:
+      return blue
+
+    default:
+      break
+  }
+}
+
+// Função para o próximo nível do jogo
+let nextLevel = () => {
+  score++
+  shuffleOrder()
+}
+
+// Função para Game Over!
+let gameOver = () => {
+  alert(
+    `Pontuação: ${score}\nVocê perdeu!\nClique em OK para iniciar um novo jogo`,
+  )
+  order = []
+  clickedOrder = []
+
+  playGame()
+}
+
+// Função para iniciar o jogo
+let playGame = () => {
+  alert('Bem-vindo ao Genius! Iniciando novo jogo!')
+  score = 0
+
+  nextLevel()
+}
+
+green.addEventListener('click', click(0))
+red.addEventListener('click', click(1))
+yellow.addEventListener('click', click(2))
+blue.addEventListener('click', click(3))
+
+playGame()
